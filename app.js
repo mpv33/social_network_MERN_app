@@ -23,7 +23,7 @@ mongoose.connection.on("error", err => {
 
 // bring in routes
 const postRoutes = require("./routes/post");
-
+const authRoutes = require("./routes/auth");
 // middleware
 
 app.use(morgan("dev"));
@@ -31,7 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(expressValidator());
 app.use("/", postRoutes);
-
+app.use("/", authRoutes);
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log(`A Node Js API is listening on port: ${port}`);
