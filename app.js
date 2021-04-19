@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-const bodyParser= require('body-parser');
+const expressValidator = require('express-validator');
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -29,7 +29,7 @@ const postRoutes = require("./routes/post");
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-
+app.use(expressValidator());
 app.use("/", postRoutes);
 
 const port = process.env.PORT || 8000;

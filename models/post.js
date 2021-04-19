@@ -3,15 +3,12 @@ const mongoose = require('mongoose')
 const postSchema = new mongoose.Schema({
     title:{
           type:String,
-          required:"title is required",
-          minlength:5,
-          maxlength:100
+          required:true
+        
     },
     body:{
         type:String,
-        required:"body is required",
-        minlength:5,
-        maxlength:100
+        required:true
     }
 })
 
