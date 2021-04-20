@@ -1,5 +1,5 @@
 const User = require('../models/user')
-const _ =require("lodash");
+const _ = require("lodash");
 const { now } = require('lodash');
 exports.getallUsers = (req, res) => {
     User.find((err, users) => {
@@ -23,8 +23,8 @@ exports.userById = (req, res, next, id) => {
                 error: 'user not found'
             })
         }
-       res.profile = user
-     //  console.log(res.profile)
+        res.profile = user
+        //  console.log(res.profile)
         next()
     })
 }
@@ -38,28 +38,38 @@ exports.hashAuthorization = (req, res, next) => {
 
 }
 exports.getUser = (req, res) => {
-    res.profile.hashed_password=undefined
-    res.profile.salt=undefined
+    res.profile.hashed_password = undefined
+    res.profile.salt = undefined
     res.json(res.profile)
 }
 
-exports.updateUser = (req,res)=>{
- let user = res.profile
- user = _.extend(user,req.body)
- user.updated= Date.now()
- user.save((err)=>{
-     if(err){
-         return res.status(400).json({
-             error : err
-         })
-     }
-     user.hashed_password=undefined
-     user.salt=undefined
-     res.json({user})
-    
- })
+exports.updateUser = (req, res) => {
+    let user = res.profile
+    user = _.extend(user, req.body)
+    user.updated = Date.now()
+    user.save((err) => {
+        if (err) {
+            return res.status(400).json({
+                error: err
+            })
+        }
+        user.hashed_password = undefined
+        user.salt = undefined
+        res.json({ user })
 
+    })
+}
+exports.deleteUser = (req,res)=>{
+    let user =res.profile
+    user.remove((err,user)=>{
+        if(err){
+            return res.status(400).json({
+                error : err
+            })
+        }
+        user.hashed_password = undefined
+        user.salt = undefined
+        res.json({ msg : 'user deleted succesfully'})
 
-
-
+    })
 }
