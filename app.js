@@ -34,6 +34,13 @@ app.use(cookieParser())
 app.use(expressValidator());
 app.use("/", postRoutes);
 app.use("/", authRoutes);
+
+app.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+      res.status(401).json({ msg: 'invalid token...Unauthorized user'});
+    }
+  });
+
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log(`A Node Js API is listening on port: ${port}`);
