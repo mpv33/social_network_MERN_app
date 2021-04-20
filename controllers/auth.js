@@ -27,13 +27,13 @@ exports.signin = (req,res) => {
     User.findOne({email}, (err,user)=>{
         if(err || !user){
             return res.status(401).json({
-                error: 'this email not exist plz signup'
+                error: 'this email not exist plz signup !'
             })
         }
     // authenicate pass 
       if(!user.authenticate(password)){
         return res.status(401).json({
-            error: 'this email and password does not matched ... plz signin again' 
+            error: 'this email and password does not matched ... plz signin again !' 
         })
       }
       // generate token based on user id and secret key
@@ -45,5 +45,12 @@ exports.signin = (req,res) => {
        user: {_id,email,name}
    })
  
+    })
+}
+
+exports.signout = (req,res)=>{
+    res.clearCookie('t')
+    return res.json({
+        msg: 'user succesfully logout thank you !'
     })
 }
