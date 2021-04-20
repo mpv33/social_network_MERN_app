@@ -25,6 +25,7 @@ mongoose.connection.on("error", err => {
 // bring in routes
 const postRoutes = require("./routes/post");
 const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
 // middleware
 
 app.use(morgan("dev"));
@@ -34,6 +35,7 @@ app.use(cookieParser())
 app.use(expressValidator());
 app.use("/", postRoutes);
 app.use("/", authRoutes);
+app.use("/", userRoutes);
 
 app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
