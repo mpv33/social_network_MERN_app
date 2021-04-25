@@ -1,6 +1,6 @@
 const User = require('../models/user')
 const _ = require("lodash");
-const { now } = require('lodash');
+//const { now } = require('lodash');
 exports.getallUsers = (req, res) => {
     User.find((err, users) => {
         if (err) {
