@@ -23,8 +23,8 @@ exports.userById = (req, res, next, id) => {
                 error: 'user not found'
             })
         }
-        res.profile = user
-        //  console.log(res.profile)
+        req.profile = user
+        console.log(req.profile)
         next()
     })
 }
@@ -38,13 +38,13 @@ exports.hashAuthorization = (req, res, next) => {
 
 }
 exports.getUser = (req, res) => {
-    res.profile.hashed_password = undefined
-    res.profile.salt = undefined
-    res.json(res.profile)
+    req.profile.hashed_password = undefined
+    req.profile.salt = undefined
+    res.json(req.profile)
 }
 
 exports.updateUser = (req, res) => {
-    let user = res.profile
+    let user = req.profile
     user = _.extend(user, req.body)
     user.updated = Date.now()
     user.save((err) => {
@@ -58,6 +58,7 @@ exports.updateUser = (req, res) => {
         res.json({ user })
 
     })
+  
 }
 exports.deleteUser = (req,res)=>{
     let user =res.profile
