@@ -11,7 +11,7 @@ class DeleteUser extends Component {
 
     deleteAccount = () => {
         const token = isAuthenticated().token;
-        const userId = this.props.userId;
+        const userId = this.props.id ? this.props.id :this.props.userId;
         remove(userId, token).then(data => {
             if (data.error) {
                 console.log(data.error);

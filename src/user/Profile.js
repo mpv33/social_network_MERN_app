@@ -70,11 +70,13 @@ class Profile extends Component {
   componentDidMount() {
     const userId = this.props.match.params.userId;
     this.init(userId);
+  
   }
 
   componentWillReceiveProps(props) {
     const userId = props.match.params.userId;
     this.init(userId);
+  
   }
 
   render() {
@@ -126,7 +128,8 @@ class Profile extends Component {
                 </Link>
                 <DeleteUser userId={user._id} />
               </div>
-            ) : (
+            ) : 
+            (
               <FollowProfileButton
                 following={this.state.following}
                 onButtonClick={this.clickFollowButton}
@@ -149,7 +152,7 @@ class Profile extends Component {
                         Edit Profile
                       </Link>
                       {/*<DeleteUser userId={user._id} />*/}
-                      <DeleteUser />
+                      <DeleteUser id={user._id} />
                     </div>
                   </div>
                 )}

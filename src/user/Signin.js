@@ -4,9 +4,9 @@ import { signin, authenticate } from "../auth";
 import SocialLogin from "./SocialLogin";
 
 class Signin extends Component {
-    constructor() {
-        super();
-        this.state = {
+    // constructor() {
+    //     super();
+        state = {
             email: "",
             password: "",
             error: "",
@@ -14,7 +14,7 @@ class Signin extends Component {
             loading: false,
             recaptcha: false
         };
-    }
+  //  }
 
     handleChange = name => event => {
         this.setState({ error: "" });
@@ -64,10 +64,12 @@ class Signin extends Component {
         // console.log(user);
         if (this.state.recaptcha) {
             signin(user).then(data => {
+                console.log('............',data)
                 if (data.error) {
                     this.setState({ error: data.error, loading: false });
                 } else {
                     // authenticate
+                    
                     authenticate(data, () => {
                         this.setState({ redirectToReferer: true });
                     });
