@@ -1,4 +1,4 @@
  # please check 
- fronted code : client-dev branch
+ fronted code : client-dev branch. ;
  backend code : server-dev branch
      
